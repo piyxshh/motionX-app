@@ -1,0 +1,15 @@
+{
+  "name": "motionx1",
+  "version": "1.0.0",
+  "description": "A simple AI fitness assistant for tracking calories, workouts, and providing health advice",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+    
+  },
+  "keywords": [
+    "fitness"
+  ],
+  "author": "piyush singh",
+  "license": "ISC"
+}

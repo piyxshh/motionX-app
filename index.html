@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MotionX - Your Fitness Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-bolt"></i>
+                <h1>MotionX</h1>
+            </div>
+            <nav>
+                <button class="nav-btn active" data-tab="dashboard">Dashboard</button>
+                <button class="nav-btn" data-tab="nutrition">Nutrition</button>
+                <button class="nav-btn" data-tab="workouts">Workouts</button>
+                <button class="nav-btn" data-tab="assistant">Assistant</button>
+            </nav>
+        </header>
+
+        <main>
+            <!-- Dashboard Tab -->
+            <section id="dashboard" class="tab-content active">
+                <div class="dashboard-grid">
+                    <div class="card summary-card">
+                        <h2>Today's Summary</h2>
+                        <div class="stats">
+                            <div class="stat">
+                                <span class="stat-value" id="calories-today">0</span>
+                                <span class="stat-label">Calories</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value" id="protein-today">0g</span>
+                                <span class="stat-label">Protein</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value" id="workout-status">Not done</span>
+                                <span class="stat-label">Workout</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card quick-add">
+                        <h3>Quick Add</h3>
+                        <div class="quick-actions">
+                            <button id="add-meal-btn"><i class="fas fa-utensils"></i> Add Meal</button>
+                            <button id="log-workout-btn"><i class="fas fa-dumbbell"></i> Log Workout</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card reminders">
+                        <h3>Reminders</h3>
+                        <ul id="reminders-list">
+                            <!-- Reminders will be added dynamically -->
+                        </ul>
+                    </div>
+                    
+                    <div class="card progress">
+                        <h3>Weekly Progress</h3>
+                        <div class="progress-chart">
+                            <canvas id="weekly-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Nutrition Tab -->
+            <section id="nutrition" class="tab-content">
+                <div class="section-header">
+                    <h2>Nutrition Tracker</h2>
+                    <button id="add-food-btn" class="primary-btn"><i class="fas fa-plus"></i> Add Food</button>
+                </div>
+                
+                <div class="food-log">
+                    <h3>Today's Food Log</h3>
+                    <div class="food-categories">
+                        <div class="food-category">
+                            <h4>Breakfast</h4>
+                            <ul id="breakfast-list" class="meal-list"></ul>
+                        </div>
+                        <div class="food-category">
+                            <h4>Lunch</h4>
+                            <ul id="lunch-list" class="meal-list"></ul>
+                        </div>
+                        <div class="food-category">
+                            <h4>Dinner</h4>
+                            <ul id="dinner-list" class="meal-list"></ul>
+                        </div>
+                        <div class="food-category">
+                            <h4>Snacks</h4>
+                            <ul id="snacks-list" class="meal-list"></ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="nutrition-summary">
+                    <h3>Nutrition Summary</h3>
+                    <div class="nutrient-bars">
+                        <div class="nutrient-bar">
+                            <span>Calories</span>
+                            <div class="progress-container">
+                                <div id="calories-bar" class="progress-bar"></div>
+                                <span id="calories-progress">0/2000</span>
+                            </div>
+                        </div>
+                        <div class="nutrient-bar">
+                            <span>Protein</span>
+                            <div class="progress-container">
+                                <div id="protein-bar" class="progress-bar"></div>
+                                <span id="protein-progress">0/120g</span>
+                            </div>
+                        </div>
+                        <div class="nutrient-bar">
+                            <span>Carbs</span>
+                            <div class="progress-container">
+                                <div id="carbs-bar" class="progress-bar"></div>
+                                <span id="carbs-progress">0/250g</span>
+                            </div>
+                        </div>
+                        <div class="nutrient-bar">
+                            <span>Fat</span>
+                            <div class="progress-container">
+                                <div id="fat-bar" class="progress-bar"></div>
+                                <span id="fat-progress">0/65g</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Workouts Tab -->
+            <section id="workouts" class="tab-content">
+                <div class="section-header">
+                    <h2>Workout Tracker</h2>
+                    <button id="add-workout-btn" class="primary-btn"><i class="fas fa-plus"></i> Add Workout</button>
+                </div>
+                
+                <div class="workout-schedule">
+                    <h3>Workout Schedule</h3>
+                    <div class="week-view">
+                        <div class="day-column">
+                            <div class="day-header">Monday</div>
+                            <div id="monday-workout" class="day-content"></div>
+                        </div>
+                        <div class="day-column">
+                            <div class="day-header">Tuesday</div>
+                            <div id="tuesday-workout" class="day-content"></div>
+                        </div>
+                        <div class="day-column">
+                            <div class="day-header">Wednesday</div>
+                            <div id="wednesday-workout" class="day-content"></div>
+                        </div>
+                        <div class="day-column">
+                            <div class="day-header">Thursday</div>
+                            <div id="thursday-workout" class="day-content"></div>
+                        </div>
+                        <div class="day-column">
+                            <div class="day-header">Friday</div>
+                            <div id="friday-workout" class="day-content"></div>
+                        </div>
+                        <div class="day-column">
+                            <div class="day-header">Saturday</div>
+                            <div id="saturday-workout" class="day-content"></div>
+                        </div>
+                        <div class="day-column">
+                            <div class="day-header">Sunday</div>
+                            <div id="sunday-workout" class="day-content"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="workout-history">
+                    <h3>Workout History</h3>
+                    <div id="workout-history-list" class="history-list"></div>
+                </div>
+            </section>
+
+            <!-- Assistant Tab -->
+            <section id="assistant" class="tab-content">
+                <div class="chat-container">
+                    <div class="chat-header">
+                        <h2><i class="fas fa-robot"></i> MotionX Assistant</h2>
+                    </div>
+                    <div id="chat-messages" class="chat-messages">
+                        <div class="message assistant">
+                            <div class="message-content">
+                                Hello! I'm MotionX, your fitness and nutrition assistant. How can I help you today?
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" id="user-input" placeholder="Ask about workouts, nutrition, recipes...">
+                        <button id="send-message-btn"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div id="food-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Add Food</h2>
+            <form id="food-form">
+                <div class="form-group">
+                    <label for="food-name">Food Name</label>
+                    <input type="text" id="food-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="food-category">Meal</label>
+                    <select id="food-category">
+                        <option value="breakfast">Breakfast</option>
+                        <option value="lunch">Lunch</option>
+                        <option value="dinner">Dinner</option>
+                        <option value="snacks">Snacks</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="food-calories">Calories</label>
+                    <input type="number" id="food-calories" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="food-protein">Protein (g)</label>
+                    <input type="number" id="food-protein" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="food-carbs">Carbs (g)</label>
+                    <input type="number" id="food-carbs" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="food-fat">Fat (g)</label>
+                    <input type="number" id="food-fat" min="0" required>
+                </div>
+                <button type="submit" class="primary-btn">Add Food</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="workout-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Add Workout</h2>
+            <form id="workout-form">
+                <div class="form-group">
+                    <label for="workout-name">Workout Name</label>
+                    <input type="text" id="workout-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="workout-day">Day</label>
+                    <select id="workout-day">
+                        <option value="monday">Monday</option>
+                        <option value="tuesday">Tuesday</option>
+                        <option value="wednesday">Wednesday</option>
+                        <option value="thursday">Thursday</option>
+                        <option value="friday">Friday</option>
+                        <option value="saturday">Saturday</option>
+                        <option value="sunday">Sunday</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="workout-time">Time</label>
+                    <input type="time" id="workout-time" required>
+                </div>
+                <div class="form-group">
+                    <label for="workout-duration">Duration (minutes)</label>
+                    <input type="number" id="workout-duration" min="5" required>
+                </div>
+                <button type="submit" class="primary-btn">Schedule Workout</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="log-workout-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Log Workout</h2>
+            <form id="log-workout-form">
+                <div class="form-group">
+                    <label for="log-workout-name">Workout Name</label>
+                    <input type="text" id="log-workout-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="log-workout-duration">Duration (minutes)</label>
+                    <input type="number" id="log-workout-duration" min="5" required>
+                </div>
+                <div class="form-group">
+                    <label for="log-workout-calories">Calories Burned (estimate)</label>
+                    <input type="number" id="log-workout-calories" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="log-workout-notes">Notes</label>
+                    <textarea id="log-workout-notes"></textarea>
+                </div>
+                <button type="submit" class="primary-btn">Log Workout</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
