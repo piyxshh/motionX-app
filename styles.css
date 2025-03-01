@@ -252,6 +252,8 @@ nav {
     margin-bottom: 1rem;
 }
 
+
+
 .progress-container {
     display: flex;
     align-items: center;
@@ -264,7 +266,7 @@ nav {
     border-radius: 5px;
     flex: 1;
     position: relative;
-    overflow: hidden;
+    overflow: visible; 
 }
 
 .progress-bar::before {
@@ -274,9 +276,16 @@ nav {
     left: 0;
     height: 100%;
     background-color: var(--primary-color);
-    width: 0%; /* Will be updated via JS */
+    width: 0%; 
     transition: width 0.3s ease;
+    max-width: none; 
 }
+
+
+.progress-bar.exceeded::before {
+    background-color: var(--warning-color);
+}
+
 
 /* Workouts Tab */
 .workout-schedule {

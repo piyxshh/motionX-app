@@ -231,15 +231,15 @@ function updateNutritionTab() {
     const carbsConsumed = todaysFoods.reduce((total, food) => total + food.carbs, 0);
     const fatConsumed = todaysFoods.reduce((total, food) => total + food.fat, 0);
     
-    document.getElementById('calories-bar').style.width = `${Math.min(100, (caloriesConsumed / appData.user.dailyCalorieGoal) * 100)}%`;
-    document.getElementById('protein-bar').style.width = `${Math.min(100, (proteinConsumed / appData.user.dailyProteinGoal) * 100)}%`;
-    document.getElementById('carbs-bar').style.width = `${Math.min(100, (carbsConsumed / appData.user.dailyCarbsGoal) * 100)}%`;
-    document.getElementById('fat-bar').style.width = `${Math.min(100, (fatConsumed / appData.user.dailyFatGoal) * 100)}%`;
+    document.getElementById('calories-bar').style.width = `${(caloriesConsumed) * 100}%`;
+    document.getElementById('protein-bar').style.width = `${(proteinConsumed) * 100}%`;
+    document.getElementById('carbs-bar').style.width = `${(carbsConsumed) * 100}%`;
+    document.getElementById('fat-bar').style.width = `${(fatConsumed) * 100}%`;
     
-    document.getElementById('calories-progress').textContent = `${caloriesConsumed}/${appData.user.dailyCalorieGoal}`;
-    document.getElementById('protein-progress').textContent = `${proteinConsumed}g/${appData.user.dailyProteinGoal}g`;
-    document.getElementById('carbs-progress').textContent = `${carbsConsumed}g/${appData.user.dailyCarbsGoal}g`;
-    document.getElementById('fat-progress').textContent = `${fatConsumed}g/${appData.user.dailyFatGoal}g`;
+    document.getElementById('calories-progress').textContent = `${caloriesConsumed}g`;
+    document.getElementById('protein-progress').textContent = `${proteinConsumed}g`;
+    document.getElementById('carbs-progress').textContent = `${carbsConsumed}g`;
+    document.getElementById('fat-progress').textContent = `${fatConsumed}g`;
 }
 
 function updateWorkoutTab() {
