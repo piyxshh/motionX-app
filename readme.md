@@ -76,15 +76,6 @@ MotionX is built with:
 - **Service Worker**: Offline functionality
 - **Web Notifications API**: Reminders
 
-## AI Integration
-
-By default, MotionX uses a rule-based system for providing advice. For enhanced capabilities, you can connect it to an AI API:
-
-1. Get an API key from an AI provider (like OpenAI)
-2. Replace the placeholder API key in `app.js`:
-```javascript
-const AI_API_KEY = 'your-api-key-here';
-```
 
 ## Customization
 
